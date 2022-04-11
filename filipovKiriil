@@ -1,0 +1,47 @@
+class SSI {
+private:
+	int* arr_SSI;
+	int size;
+	//порождение случайной перестановки в массиве
+	void Random_Permutation() {
+		srand(time(NULL));
+		for (int i = size-2; i >= 0; i -= 2) {
+			int temp = arr_SSI[i];
+			int j = rand() % (i - 1) + 1;
+			arr_SSI[i] = arr_SSI[j];
+			arr_SSI[j] = temp;
+		}
+	}
+public:
+	//заполнение массива числами
+	SSI(int size) {
+		this->size = size;
+		arr_SSI = new int[size];
+		for (int i = 0; i < size; i++) {
+			arr_SSI[i] = i;
+		}
+	}
+	void Sort_SSI() {
+		Random_Permutation();
+		for (int i = 0; i < size-1; i++) {
+			if (arr_SSI[i] > arr_SSI[i + 1]) {
+				int j = i + 1;
+				while (arr_SSI[j - 1] > arr_SSI[j]) {
+					int temp = arr_SSI[j];
+					arr_SSI[j] = arr_SSI[j - 1];
+					arr_SSI[j - 1] = temp;
+					j--;
+				}
+			}
+		}
+	}
+	void Print_SSI() {
+		for (int i = 0; i < size; i++) {
+			cout<<arr_SSI[i]<<' ';
+		}
+		cout << endl;
+	}
+	~SSI() {
+		delete[]arr_SSI;
+	}
+};
